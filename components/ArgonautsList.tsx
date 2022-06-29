@@ -2,7 +2,9 @@ import {NextPage} from "next";
 import useSWR, {useSWRConfig} from "swr";
 import {ArgonautData} from "../types/globals";
 import Chip from "./Chip";
+import Tooltip from "rc-tooltip"
 import {MouseEventHandler} from "react";
+import 'rc-tooltip/assets/bootstrap_white.css'
 
 const fetcher = (url: string) => fetch(url).then(r => r.json())
 
@@ -25,11 +27,24 @@ const ArgonautsList: NextPage = () => {
 
     return (
         <>
-
             <ul className={`grid grid-cols-3 place-items-center`}>
                 <h3 className={`col-span-3 font-semibold text-xl mb-4`}>{selectedCount} / {data?.length} argonautes sélectionnés</h3>
                 {error && <li>Erreur pendant le chargement...</li>}
-                {(!error && !data && <li>Chargement...</li>) || data?.map(arg => <li key={arg._id}><Chip onCrossClick={e => handleCrossClick(arg._id)} onClick={e => handleChipClick(arg._id)} selected={arg.selected}>{arg.name}</Chip></li>)}
+                {(!error && !data && <li>Chargement...</li>)
+                    || data?.map(arg => {
+                        return (
+                            <li key={arg._id}>
+                                    <Chip
+                                        onCrossClick={e => handleCrossClick(arg._id)}
+                                        onClick={e => handleChipClick(arg._id)}
+                                        selected={arg.selected}
+                                        tooltip={arg.adjectives.join(', ')}
+                                    >
+                                        {arg.name}
+                                    </Chip>
+                            </li>
+                        )}
+                    )}
             </ul>
         </>
     )
