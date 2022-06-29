@@ -26,7 +26,7 @@ const Home: NextPage<Props> = ({ argonauts }) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const argonauts = await fetch("https://lezard-go-not.vercel.app/api/v1/argonauts").then(r => r.json())
+  const argonauts = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/argonauts`).then(r => r.json())
   return {
     props: {
       argonauts

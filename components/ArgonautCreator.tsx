@@ -18,12 +18,12 @@ const ArgonautCreator: NextPage = () => {
             adjectives: adjectivesString.split(",").map(adj => adj.trim())
         })
 
-        await fetch("https://lezard-go-not.vercel.app/api/v1/argonauts", {
+        await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/argonauts`, {
             method: "POST",
             body
         })
 
-        mutate("https://lezard-go-not.vercel.app/api/v1/argonauts")
+        mutate(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/argonauts`)
     }
     return (
         <form className={`flex flex-col items-center gap-4 my-6`} onSubmit={handleSubmit}>

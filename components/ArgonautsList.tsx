@@ -10,17 +10,17 @@ const fetcher = (url: string) => fetch(url).then(r => r.json())
 
 const ArgonautsList: NextPage = () => {
     const { mutate } = useSWRConfig()
-    const { data, error } = useSWR<ArgonautData[]>("https://lezard-go-not.vercel.app/api/v1/argonauts", fetcher)
+    const { data, error } = useSWR<ArgonautData[]>(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/argonauts`, fetcher)
     const selectedCount = data?.filter(arg => arg.selected).length
 
     const handleChipClick = async (_id: string) => {
-        await fetch(`https://lezard-go-not.vercel.app/api/v1/argonauts/${_id}`, {method: "PATCH"})
-        mutate('https://lezard-go-not.vercel.app/api/v1/argonauts')
+        await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/argonauts/${_id}`, {method: "PATCH"})
+        mutate(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/argonauts`)
     }
 
     const handleCrossClick = async (_id: string) => {
-        await fetch(`https://lezard-go-not.vercel.app/api/v1/argonauts/${_id}`, {method: "DELETE"})
-        mutate('https://lezard-go-not.vercel.app/api/v1/argonauts')
+        await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/argonauts/${_id}`, {method: "DELETE"})
+        mutate(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/argonauts`)
     }
 
     return (
