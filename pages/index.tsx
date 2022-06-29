@@ -4,6 +4,7 @@ import useSWR, {useSWRConfig} from 'swr'
 import {ArgonautData} from "types/globals";
 import ArgonautsList from "components/ArgonautsList"
 import ArgonautCreator from "../components/ArgonautCreator";
+import Head from "next/head";
 
 
 
@@ -15,6 +16,9 @@ const Home: NextPage<Props> = ({ argonauts }) => {
 
   return (
     <main>
+        <Head>
+            <title>Lézard Go Not - Hugo Martin</title>
+        </Head>
       <ArgonautsList />
       <ArgonautCreator/>
     </main>
