@@ -5,4 +5,8 @@ const illegalMethod: NextApiHandler = async (req, res) => {
     res.status(405).send("Method not Allowed")
 }
 
-export {illegalMethod}
+const documentNotFound: NextApiHandler = async (req, res) => {
+    res.status(404).send("Document Not Found")
+}
+
+export {illegalMethod, documentNotFound}

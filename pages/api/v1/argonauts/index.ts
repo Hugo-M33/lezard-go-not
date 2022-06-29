@@ -13,6 +13,7 @@ const createArgonauts: NextApiHandler = async (req, res) => {
     const client = await clientPromise
     const db = client.db("lezard-go-not")
     const document = JSON.parse(req.body)
+    document.selected = false
     const argonaut = await db.collection("argonauts").insertOne(document)
     res.status(200).json(argonaut)
 }
